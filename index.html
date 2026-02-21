@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID ULTRA 2.0 | FULL EDITION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Montserrat:wght@600;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --p: #8a2be2; --g: #00ffaa; --r: #ff3e3e; --bg: #030008; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+        /* --- LOGIN --- */
+        #loginView { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, #110620 0%, #030008 100%); z-index: 10000; display: flex; align-items: center; justify-content: center; }
+        .login-box { width: 90%; max-width: 400px; padding: 40px; background: rgba(255,255,255,0.03); border: 1px solid rgba(138,43,226,0.3); border-radius: 40px; text-align: center; backdrop-filter: blur(20px); }
+        .id-c { background: #000; border: 1.5px dashed var(--p); padding: 20px; border-radius: 20px; font-family: 'JetBrains Mono'; color: var(--g); margin: 25px 0; font-size: 14px; letter-spacing: 2px; }
+
+        /* --- MAIN APP --- */
+        #mainApp { display: none; }
+        .header { padding: 30px 20px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.3); }
+        .p-img { width: 55px; height: 55px; border-radius: 15px; margin-right: 15px; box-shadow: 0 0 20px var(--p); border: 2px solid var(--p); object-fit: cover; }
+
+        /* --- HOME --- */
+        .page { display: none; padding-bottom: 110px; }
+        .page.active { display: block; }
+        .m-card { background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); border: 1px solid rgba(138,43,226,0.3); padding: 55px 30px; border-radius: 45px; margin: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); cursor: pointer; }
+        .m-card h2 { margin: 0; font-family: 'Syncopate'; font-size: 26px; text-shadow: 0 0 20px var(--p); }
+        .stats { display: flex; justify-content: space-between; margin-top: 35px; font-weight: 900; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+        .membership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
+        .mini-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(138,43,226,0.3); border-radius: 25px; padding: 20px; }
+        .mini-box.full { grid-column: span 2; border: 1px solid var(--g); background: rgba(0, 255, 170, 0.05); }
+        .mini-box h3 { font-family: 'Syncopate'; font-size: 11px; margin: 0 0 10px; color: var(--p); }
+        .mini-box p { font-size: 9px; margin: 5px 0; color: #bbb; font-weight: 800; }
+
+        /* --- SIGNAL ENGINE (SUNDOR FITTING) --- */
+        .engine-ui { padding: 15px; }
+        .bar { background: rgba(255,255,255,0.03); border: 1px solid rgba(138,43,226,0.4); padding: 18px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .terminal { background: #000; border: 1.5px solid rgba(138,43,226,0.2); border-radius: 40px; min-height: 480px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; overflow: hidden; }
+        
+        /* SIGNAL BOX FITTING */
+        .sig-box { width: 100%; border-radius: 30px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; text-align: center; }
+        .accuracy-tag { display: inline-block; padding: 6px 15px; border-radius: 20px; background: rgba(0, 255, 170, 0.1); color: var(--g); font-size: 10px; font-weight: 900; margin-bottom: 20px; border: 1px solid var(--g); }
+        .arrow { font-size: 85px; filter: drop-shadow(0 0 30px currentColor); display: none; margin: 10px 0; }
+        .up { color: var(--g); transform: rotate(-90deg); }
+        .down { color: var(--r); transform: rotate(90deg); }
+        
+        .rules-container { width: 100%; margin-top: 25px; display: none; padding: 0 10px; }
+        .rule-item { background: rgba(255,255,255,0.03); border-left: 3px solid var(--r); padding: 12px; border-radius: 8px; font-size: 9px; color: #ff8888; font-weight: 900; margin-bottom: 8px; text-align: left; text-transform: uppercase; }
+
+        .f-card { width: 100%; background: rgba(138,43,226,0.1); border-radius: 20px; padding: 20px; margin-bottom: 12px; border-left: 6px solid var(--p); display: flex; justify-content: space-between; align-items: center; }
+
+        /* --- BUTTONS --- */
+        .btn { width: 100%; padding: 24px; border-radius: 22px; font-family: 'Syncopate'; font-size: 11px; border: none; font-weight: 900; cursor: pointer; transition: 0.3s; }
+        .btn-p { background: linear-gradient(135deg, var(--p), #4b0082); color: white; box-shadow: 0 15px 30px rgba(138,43,226,0.4); }
+
+        .nav { position: fixed; bottom: 0; width: 100%; height: 90px; background: #05010a; display: flex; border-top: 1px solid rgba(255,255,255,0.05); }
+        .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Syncopate'; font-size: 9px; color: #444; }
+        .tab.active { color: var(--p); }
+
+        #picker { position: fixed; inset: 0; background: var(--bg); z-index: 20000; display: none; flex-direction: column; }
+        .p-item { padding: 22px; border-bottom: 1px solid #111; display: flex; align-items: center; gap: 15px; }
+        .f-3d { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body>
+
+    <div id="loginView">
+        <div class="login-box">
+            <h1 style="font-family:'Syncopate'; font-size:22px;">VOID ULTRA 2.0</h1>
+            <div class="id-c" id="myID">FETCHING ID...</div>
+            <button class="btn btn-p" onclick="auth()">AUTHENTICATE</button>
+            <button class="btn" style="background:transparent; color:#555; margin-top:15px;" onclick="start('TRIAL')">GUEST ACCESS</button>
+        </div>
+    </div>
+
+    <div id="mainApp">
+        <div class="header">
+            <img src="https://i.ibb.co.com/TMTWjnnC/1769448926246-2.jpg" class="p-img" alt="M">
+            <div>
+                <h3 id="tierText" style="margin:0; font-family:'Syncopate'; font-size:10px;">OPERATOR</h3>
+                <div style="font-size:8px; color:var(--g); font-weight:900;">SECURE CONNECTION</div>
+            </div>
+        </div>
+
+        <div id="homePage" class="page active">
+            <div class="m-card" onclick="nav('signal', 'live')">
+                <h2 style="color:var(--g);">LIVE SIGNAL</h2>
+                <div class="stats"><span>USED: <span id="lu">0</span> / <span id="lm">0</span></span><span style="color:var(--g)">ONLINE</span></div>
+            </div>
+
+            <div class="m-card" onclick="nav('signal', 'future')">
+                <h2 style="color:var(--p);">FUTURE SIGNAL</h2>
+                <div class="stats"><span>USED: <span id="fu">0</span> / <span id="fm">0</span></span><span style="color:var(--p)">DECRYPTED</span></div>
+            </div>
+
+            <div class="membership-grid">
+                <div class="mini-box full"><h3>INFINITY ACCESS</h3><p>LIVE: <b>UNLIMITED</b></p><p>FUTURE: <b>UNLIMITED</b></p></div>
+                <div class="mini-box"><h3>PRIME SHIP</h3><p>LIVE: <b>100</b></p><p>FUTURE: <b>50</b></p></div>
+                <div class="mini-box"><h3>VORTEX</h3><p>LIVE: <b>50</b></p><p>FUTURE: <b>25</b></p></div>
+                <div class="mini-box"><h3>FREE TRIAL</h3><p>LIVE: <b>3</b></p><p>FUTURE: <b>3</b></p></div>
+                <div class="mini-box"><h3>ACCURACY</h3><p>MAX: <b>98.4%</b></p></div>
+            </div>
+            <a href="https://t.me/xr_white" class="btn btn-p" style="margin: 0 20px; width: calc(100% - 40px); background:#0088cc; text-decoration:none; display:flex; align-items:center; justify-content:center;">TELEGRAM</a>
+        </div>
+
+        <div id="signalPage" class="page">
+            <div class="engine-ui">
+                <div id="liveBar" class="bar">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <img id="flag" src="https://flagcdn.com/w80/eu.png" class="f-3d">
+                        <span id="pair" style="font-weight:900; font-size:14px;">EUR/USD (OTC)</span>
+                    </div>
+                    <span style="color:var(--p); font-size:10px; font-weight:900;" onclick="showPicker(true)">CHANGE ▼</span>
+                </div>
+                <div id="futureBar" class="bar" style="display:none;">
+                    <span style="font-family:'Syncopate'; font-size:11px;">QUANTITY:</span>
+                    <select id="qty" style="background:transparent; color:var(--p); border:none; font-family:'Syncopate'; font-size:14px; font-weight:900;">
+                        <option value="1">1</option><option value="3">3</option><option value="5">5</option><option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="terminal">
+                    <div id="st" style="font-family:'Syncopate'; font-size:12px; color:#1a1a1a;">IDLE STANDBY</div>
+                    
+                    <div id="res" style="display:none; width:100%;">
+                        <div class="sig-box" id="sigBox">
+                            </div>
+                    </div>
+
+                    <div id="rules" class="rules-container">
+                        <div class="rule-item">⚠️ AVOID BIG WICK CANDLES</div>
+                        <div class="rule-item">⚠️ AVOID GAP UP / GAP DOWN</div>
+                        <div class="rule-item">⚠️ AVOID HIGH VOLATILITY</div>
+                        <div class="rule-item">⚠️ CHECK NEWS BEFORE TRADE</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-p" id="runBtn" style="margin-top:20px;" onclick="process()">GENERATE SIGNAL</button>
+            </div>
+        </div>
+
+        <div class="nav">
+            <div class="tab active" id="tabH" onclick="nav('home')">HOME</div>
+            <div class="tab" id="tabS" onclick="nav('signal')">SIGNAL</div>
+        </div>
+    </div>
+
+    <div id="picker">
+        <div style="padding:30px; border-bottom:1px solid #111; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:'Syncopate';">MARKETS</span>
+            <span onclick="showPicker(false)" style="font-size:35px; color:var(--p);">&times;</span>
+        </div>
+        <div id="mList" style="flex:1; overflow-y:auto;"></div>
+    </div>
+
+    <script>
+        let uid = localStorage.getItem('v2_max_id') || Array.from({length:15}, () => "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".charAt(Math.floor(Math.random()*36))).join('');
+        localStorage.setItem('v2_max_id', uid);
+        document.getElementById('myID').innerText = uid;
+
+        const config = { 'PRIME':{l:100, f:50}, 'VORTEX':{l:50, f:25}, 'INFINITY':{l:999, f:999}, 'TRIAL':{l:3, f:3} };
+        let tier = 'TRIAL', mode = 'live';
+
+        async function auth() {
+            try {
+                const r = await fetch('https://raw.githubusercontent.com/primepain/PAIN-X-BINARY-BoT/main/database.json');
+                const db = await r.json();
+                if(db[uid]) start(db[uid].tier);
+                else alert("ID NOT FOUND!");
+            } catch(e) { alert("ERROR!"); }
+        }
+
+        function start(t) {
+            tier = t;
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('tierText').innerText = t + " OPERATOR";
+            updateCounters();
+        }
+
+        function updateCounters() {
+            document.getElementById('lu').innerText = localStorage.getItem('v2_l_u') || 0;
+            document.getElementById('fu').innerText = localStorage.getItem('v2_f_u') || 0;
+            document.getElementById('lm').innerText = config[tier].l;
+            document.getElementById('fm').innerText = config[tier].f;
+        }
+
+        function nav(p, mType = 'live') {
+            document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tb => tb.classList.remove('active'));
+            document.getElementById(p+'Page').classList.add('active');
+            document.getElementById('tab'+p[0].toUpperCase()).classList.add('active');
+            if(p === 'signal') {
+                mode = mType;
+                document.getElementById('liveBar').style.display = mType === 'live' ? 'flex' : 'none';
+                document.getElementById('futureBar').style.display = mType === 'future' ? 'flex' : 'none';
+                document.getElementById('res').style.display = 'none';
+                document.getElementById('rules').style.display = 'none';
+                document.getElementById('st').style.display = 'block';
+            }
+        }
+
+        const markets = [
+            {n:"EUR/USD (OTC)", f:"eu"}, {n:"USD/BDT (OTC)", f:"bd"}, {n:"USD/BRL (OTC)", f:"br"},
+            {n:"GBP/JPY (OTC)", f:"jp"}, {n:"AUD/CAD (OTC)", f:"au"}, {n:"NZD/CHF (OTC)", f:"ch"},
+            {n:"EUR/GBP (OTC)", f:"eu"}, {n:"GBP/CAD (OTC)", f:"ca"}, {n:"USD/INR (OTC)", f:"in"},
+            {n:"USD/PKR (OTC)", f:"pk"}, {n:"EUR/SGD (OTC)", f:"sg"}, {n:"CAD/JPY (OTC)", f:"jp"},
+            {n:"AUD/JPY (OTC)", f:"au"}, {n:"GBP/CHF (OTC)", f:"ch"}
+        ];
+
+        function process() {
+            const key = mode === 'live' ? 'v2_l_u' : 'v2_f_u';
+            let used = parseInt(localStorage.getItem(key) || 0);
+            const totalLimit = config[tier][mode[0]];
+            if(used >= totalLimit) { alert("LIMIT EXCEEDED!"); return; }
+
+            const btn = document.getElementById('runBtn');
+            const status = document.getElementById('st');
+            const result = document.getElementById('res');
+            const sigBox = document.getElementById('sigBox');
+            const rules = document.getElementById('rules');
+
+            btn.disabled = true; status.innerText = "DECRYPTING...";
+            result.style.display = 'none'; rules.style.display = 'none'; status.style.display = 'block';
+
+            setTimeout(() => {
+                status.style.display = 'none'; result.style.display = 'block'; sigBox.innerHTML = "";
+
+                if(mode === 'live') {
+                    used++; localStorage.setItem(key, used);
+                    const up = Math.random() > 0.5;
+                    const t = new Date(); t.setMinutes(t.getMinutes() + 1);
+                    sigBox.innerHTML = `
+                        <div class="accuracy-tag">ACCURACY: 98.4%</div>
+                        <div class="arrow ${up?'up':'down'}" style="display:block; margin:0 auto;">➤</div>
+                        <div style="font-size:28px; font-weight:900; color:${up?'var(--g)':'var(--r)'}">${up?'CALL / UP':'PUT / DOWN'}</div>
+                        <div style="font-size:55px; font-weight:900; margin:15px 0;">${t.getHours().toString().padStart(2,'0')}:${t.getMinutes().toString().padStart(2,'0')}</div>
+                    `;
+                    rules.style.display = 'block';
+                } else {
+                    let req = parseInt(document.getElementById('qty').value);
+                    let allowed = Math.min(req, (totalLimit - used));
+                    if(allowed <= 0) { alert("LIMIT!"); return; }
+                    for(let i=0; i<allowed; i++) {
+                        const m = markets[Math.floor(Math.random()*markets.length)];
+                        const up = Math.random() > 0.5;
+                        const ft = new Date(); ft.setMinutes(ft.getMinutes() + (i+1)*5);
+                        sigBox.innerHTML += `<div class="f-card"><div><b>${m.n}</b><br>${ft.getHours().toString().padStart(2,'0')}:${ft.getMinutes().toString().padStart(2,'0')}</div><div style="color:${up?'var(--g)':'var(--r)'}">${up?'↑ CALL':'↓ PUT'}</div></div>`;
+                        used++;
+                    }
+                    localStorage.setItem(key, used);
+                }
+                updateCounters();
+                btn.disabled = false; btn.innerText = "GENERATE SIGNAL";
+            }, 2500);
+        }
+
+        const list = document.getElementById('mList');
+        markets.forEach(m => {
+            const d = document.createElement('div'); d.className = 'p-item';
+            d.innerHTML = `<img src="https://flagcdn.com/w80/${m.f}.png" class="f-3d"><span>${m.n}</span>`;
+            d.onclick = () => { document.getElementById('pair').innerText = m.n; document.getElementById('flag').src = `https://flagcdn.com/w80/${m.f}.png`; showPicker(false); };
+            list.appendChild(d);
+        });
+        function showPicker(s) { document.getElementById('picker').style.display = s ? 'flex' : 'none'; }
+    </script>
+</body>
+</html>
