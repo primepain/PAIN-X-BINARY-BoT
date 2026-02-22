@@ -1,14 +1,25 @@
 {
-  "A1B2C3D4E5F6G7H": {
-    "tier": "PRIME",
-    "status": "active"
-  },
-  "EJDA6UYC9WU3ZFZ": {
-    "tier": "INFINITY",
-    "status": "active"
-  },
-  "K1L2M3N4O5P6Q7R": {
-    "tier": "VORTEX",
-    "status": "active"
-  }
+  "90WPAL93BE9BC86": { "tier": "INFINITY", "status": "active" },
+  "90WPAL93BE9BC86": { "tier": "INFINITY", "status": "active" },
+  "K1L2M3N4O5P6Q7R": { "tier": "VORTEX", "status": "active" },
+  "X9Y8Z7W6V5U4T3S": { "tier": "PRIME", "status": "active" },
+  "M7N6B5V4C3X2Z1A": { "tier": "INFINITY", "status": "active" },
+  "Q1W2E3R4T5Y6U7I": { "tier": "VORTEX", "status": "active" },
+  "P9O8I7U6Y5T4R3E": { "tier": "PRIME", "status": "active" },
+  "A1S2D3F4G5H6J7K": { "tier": "INFINITY", "status": "active" },
+  "L9K8J7H6G5F4D3S": { "tier": "VORTEX", "status": "active" },
+  "Z1X2C3V4B5N6M7Q": { "tier": "PRIME", "status": "active" },
+  "W9E8R7T6Y5U4I3O": { "tier": "INFINITY", "status": "active" },
+  "M1N2B3V4C5X6Z7P": { "tier": "VORTEX", "status": "active" },
+  "T1Y2U3I4O5P6A7S": { "tier": "PRIME", "status": "active" },
+  "D9F8G7H6J5K4L3M": { "tier": "INFINITY", "status": "active" },
+  "B1V2C3X4Z5M6N7L": { "tier": "VORTEX", "status": "active" },
+  "K9J8H7G6F5D4S3A": { "tier": "PRIME", "status": "active" },
+  "U1I2O3P4A5S6D7F": { "tier": "INFINITY", "status": "active" },
+  "G9H8J7K6L5M4N3B": { "tier": "VORTEX", "status": "active" },
+  "V1C2X3Z4Q5W6E7R": { "tier": "PRIME", "status": "active" },
+  "T9Y8U7I6O5P4L3K": { "tier": "INFINITY", "status": "active" },
+  "S1D2F3G4H5J6K7L": { "tier": "VORTEX", "status": "active" },
+  "X1C2V3B4N5M6Q7W": { "tier": "PRIME", "status": "active" },
+  "E9R8T7Y6U5I4O3P": { "tier": "INFINITY", "status": "active" }
 }
